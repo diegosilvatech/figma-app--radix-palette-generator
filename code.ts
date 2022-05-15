@@ -841,25 +841,6 @@ const palettes = {
   }
 }
 
-
-type AutoLayoutTypes = "NONE" | "HORIZONTAL" | "VERTICAL";
-
-type FormDataProps = {
-  tintNumber: number;
-  circleSize: number;
-  circleSpacing: number;
-  colorCode: string;
-  colorName: string;
-  direction: string;
-  autoLayoutDirection: any;
-  themeColor: 'light' | 'dark'
-}
-
-type MessageProps = {
-  type: string;
-  formDataObject: FormDataProps
-}
-
 const convertHexCodeToRGB = (hex) => {
   let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result ? {
@@ -869,7 +850,17 @@ const convertHexCodeToRGB = (hex) => {
   } : null;
 }
 
-figma.showUI(__html__, { width: 320, height: 640, title: 'Color tint generator title' })
+type FormDataProps = {
+  colorName: string;
+  themeColor: 'light' | 'dark'
+}
+
+type MessageProps = {
+  type: string;
+  formDataObject: FormDataProps
+}
+
+figma.showUI(__html__, { width: 320, height: 640, title: 'Radix Palette Generator' })
 
 figma.ui.onmessage = (message: MessageProps) => {
   if (message.type === 'action-generate') {
@@ -891,8 +882,6 @@ figma.ui.onmessage = (message: MessageProps) => {
     parentFrame.itemSpacing = circleSpacing;
     parentFrame.primaryAxisSizingMode = 'AUTO';
     parentFrame.counterAxisSizingMode = 'AUTO';
-
-    // console.log(palettes[colorName])
 
     for (let i = 0; i < tintNumber; i++) {
       const tintNode = figma.createEllipse();
