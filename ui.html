@@ -1,0 +1,57 @@
+<h1>Color Tint Generator</h1>
+
+<form id="plugin-form">
+  <fieldset>
+    <legend>Color information</legend>
+
+    <p>
+      <label for="color-name">Select a color</label>
+      <select name="colorName" id="color-name">
+        <option value="crimson">Crimson</option>
+        <option value="sky">Sky</option>
+        <option value="purple">Purple</option>
+      </select>
+    </p>
+
+    <p>
+      <label>Choose the theme orientation</label>
+      <input type="radio" name="theme" id="light" checked />
+      <label for="light">light</label>
+      <input type="radio" name="theme" id="dark" />
+      <label for="dark">dark</label>
+    </p>
+  </fieldset>
+
+  <input type="hidden" name="themeColor" value="light" />
+
+  <button id="generate">Generate Tints</button>
+  <button id="cancel">Cancel</button>
+</form>
+
+<script>
+  document.getElementById("generate").onclick = (event) => {
+    let pluginForm = document.querySelector("#plugin-form");
+    let pluginFormData = new FormData(pluginForm);
+
+    if (document.querySelector("#dark").checked) {
+      pluginFormData.set("themeColor", "dark");
+    }
+
+    let formDataObject = {};
+
+    for (let [key, value] of pluginFormData) {
+      formDataObject[key] = value;
+    }
+
+    parent.postMessage(
+      { pluginMessage: { type: "action-generate", formDataObject } },
+      "*"
+    );
+  };
+
+  document.getElementById("cancel").onclick = (event) => {
+    parent.postMessage({ pluginMessage: { type: "action-exit" } }, "*");
+  };
+</script>
+
+<style></style>
