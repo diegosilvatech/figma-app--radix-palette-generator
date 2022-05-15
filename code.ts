@@ -850,6 +850,17 @@ const hexToRGB = (hex) => {
   } : null;
 }
 
+const generateFills = (type, palettes, colorName, themeColor, index) => {
+  return [{
+    type: type,
+    color: {
+      r: hexToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${index + 1}`]).r / 255,
+      g: hexToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${index + 1}`]).g / 255,
+      b: hexToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${index + 1}`]).b / 255,
+    }
+  }]
+}
+
 type FormDataProps = {
   colorName: string;
   themeColor: 'light' | 'dark'
@@ -864,9 +875,9 @@ figma.showUI(__html__, { width: 320, height: 640, title: 'Radix Palette Generato
 
 figma.ui.onmessage = (message: MessageProps) => {
   if (message.type === 'action-generate') {
-
     const { colorName, themeColor } = message.formDataObject;
 
+    // generated elements properties
     const tintNumber = 2;
     const circleSize = 80;
     const circleSpacing = 16;
@@ -883,38 +894,24 @@ figma.ui.onmessage = (message: MessageProps) => {
     parentFrame.counterAxisSizingMode = 'AUTO';
 
     for (let i = 0; i < tintNumber; i++) {
+      // generated element shape
       const tintNode = figma.createEllipse();
 
+      // generated element property
       const tintNodeName = `${colorName}/${themeColor}/${i + 1}`;
       tintNode.name = tintNodeName;
-
       tintNode.resize(circleSize, circleSize);
-      tintNode.fills = [{
-        type: "SOLID", color: {
-          r: hexToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${i + 1}`]).r / 255,
-          g: hexToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${i + 1}`]).g / 255,
-          b: hexToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${i + 1}`]).b / 255,
-        }
-      }];
-
+      tintNode.fills = generateFills('SOLID', palettes, colorName, themeColor, i);
       parentFrame.appendChild(tintNode);
 
       const selectFrame: FrameNode[] = [];
       selectFrame.push(parentFrame);
-
       figma.currentPage.selection = selectFrame;
       figma.viewport.scrollAndZoomIntoView(selectFrame);
 
+      // generated element style
       const colorStyle = figma.createPaintStyle();
-
-      const stylePaints: SolidPaint[] = [{
-        type: "SOLID",
-        color: {
-          r: hexToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${i + 1}`]).r / 255,
-          g: hexToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${i + 1}`]).g / 255,
-          b: hexToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${i + 1}`]).b / 255,
-        }
-      }];
+      const stylePaints: SolidPaint[] = generateFills('SOLID', palettes, colorName, themeColor, i);
 
       colorStyle.name = tintNodeName;
       colorStyle.paints = stylePaints;
