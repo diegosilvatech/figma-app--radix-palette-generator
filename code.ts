@@ -871,7 +871,7 @@ type MessageProps = {
   formDataObject: FormDataProps
 }
 
-figma.showUI(__html__, { width: 320, height: 640, title: 'Radix Palette Generator' })
+figma.showUI(__html__, { width: 320, height: 220, title: 'Radix Palette Generator' })
 
 figma.ui.onmessage = (message: MessageProps) => {
   if (message.type === 'action-generate') {
