@@ -892,6 +892,7 @@ figma.ui.onmessage = (message: MessageProps) => {
     parentFrame.itemSpacing = circleSpacing;
     parentFrame.primaryAxisSizingMode = 'AUTO';
     parentFrame.counterAxisSizingMode = 'AUTO';
+    parentFrame.fills = generateFills('SOLID', palettes, 'mauve', themeColor, 0)
 
     for (let index = 0; index < tintNumber; index++) {
       // generated element shape
