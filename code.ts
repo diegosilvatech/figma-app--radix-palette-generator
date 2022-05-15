@@ -878,12 +878,12 @@ figma.ui.onmessage = (message: MessageProps) => {
     const { colorName, themeColor } = message.formDataObject;
 
     // generated elements properties
-    const tintNumber = 2;
+    const tintNumber = 12;
     const circleSize = 80;
     const circleSpacing = 16;
 
     const parentFrame = figma.createFrame();
-    parentFrame.name = colorName;
+    parentFrame.name = `${colorName}-${themeColor}`;
     parentFrame.layoutMode = 'HORIZONTAL';
     parentFrame.paddingTop = 16;
     parentFrame.paddingRight = 16;
@@ -893,15 +893,15 @@ figma.ui.onmessage = (message: MessageProps) => {
     parentFrame.primaryAxisSizingMode = 'AUTO';
     parentFrame.counterAxisSizingMode = 'AUTO';
 
-    for (let i = 0; i < tintNumber; i++) {
+    for (let index = 0; index < tintNumber; index++) {
       // generated element shape
       const tintNode = figma.createEllipse();
 
       // generated element property
-      const tintNodeName = `${colorName}/${themeColor}/${i + 1}`;
+      const tintNodeName = `${colorName}/${themeColor}/${index + 1}`;
       tintNode.name = tintNodeName;
       tintNode.resize(circleSize, circleSize);
-      tintNode.fills = generateFills('SOLID', palettes, colorName, themeColor, i);
+      tintNode.fills = generateFills('SOLID', palettes, colorName, themeColor, index);
       parentFrame.appendChild(tintNode);
 
       const selectFrame: FrameNode[] = [];
@@ -911,11 +911,10 @@ figma.ui.onmessage = (message: MessageProps) => {
 
       // generated element style
       const colorStyle = figma.createPaintStyle();
-      const stylePaints: SolidPaint[] = generateFills('SOLID', palettes, colorName, themeColor, i);
+      const stylePaints: SolidPaint[] = generateFills('SOLID', palettes, colorName, themeColor, index);
 
       colorStyle.name = tintNodeName;
       colorStyle.paints = stylePaints;
-      console.log(colorStyle.paints)
     }
 
     figma.closePlugin('Tints generated successfully!')
