@@ -841,7 +841,7 @@ const palettes = {
   }
 }
 
-const convertHexCodeToRGB = (hex) => {
+const hexToRGB = (hex) => {
   let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result ? {
     r: parseInt(result[1], 16),
@@ -865,10 +865,9 @@ figma.showUI(__html__, { width: 320, height: 640, title: 'Radix Palette Generato
 figma.ui.onmessage = (message: MessageProps) => {
   if (message.type === 'action-generate') {
 
-
     const { colorName, themeColor } = message.formDataObject;
 
-    const tintNumber = 12;
+    const tintNumber = 2;
     const circleSize = 80;
     const circleSpacing = 16;
 
@@ -886,27 +885,40 @@ figma.ui.onmessage = (message: MessageProps) => {
     for (let i = 0; i < tintNumber; i++) {
       const tintNode = figma.createEllipse();
 
-      tintNode.name = `${colorName}/${themeColor}/${i + 1}`
+      const tintNodeName = `${colorName}/${themeColor}/${i + 1}`;
+      tintNode.name = tintNodeName;
 
       tintNode.resize(circleSize, circleSize);
-
       tintNode.fills = [{
         type: "SOLID", color: {
-          r: convertHexCodeToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${i + 1}`]).r / 255,
-          g: convertHexCodeToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${i + 1}`]).g / 255,
-          b: convertHexCodeToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${i + 1}`]).b / 255,
+          r: hexToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${i + 1}`]).r / 255,
+          g: hexToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${i + 1}`]).g / 255,
+          b: hexToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${i + 1}`]).b / 255,
         }
       }];
 
       parentFrame.appendChild(tintNode);
 
       const selectFrame: FrameNode[] = [];
-
       selectFrame.push(parentFrame);
 
       figma.currentPage.selection = selectFrame;
-
       figma.viewport.scrollAndZoomIntoView(selectFrame);
+
+      const colorStyle = figma.createPaintStyle();
+
+      const stylePaints: SolidPaint[] = [{
+        type: "SOLID",
+        color: {
+          r: hexToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${i + 1}`]).r / 255,
+          g: hexToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${i + 1}`]).g / 255,
+          b: hexToRGB(palettes[colorName.toLocaleLowerCase()][themeColor][`${colorName}${i + 1}`]).b / 255,
+        }
+      }];
+
+      colorStyle.name = tintNodeName;
+      colorStyle.paints = stylePaints;
+      console.log(colorStyle.paints)
     }
 
     figma.closePlugin('Tints generated successfully!')
