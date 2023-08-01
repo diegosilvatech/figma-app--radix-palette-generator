@@ -186,8 +186,6 @@ const generateFills = (
   themeColor: "light" | "dark",
   index
 ): Paint[] => {
-  debugger;
-  const isDark = themeColor === "dark";
   const isAlpha = colorType === "alpha";
   const paletteKey = palettes[colorType];
   let radixColorName = colorName;
@@ -235,8 +233,6 @@ figma.showUI(__html__, {
 figma.ui.onmessage = (message: MessageProps) => {
   if (message.type === "action-generate") {
     const { colorName, colorType, themeColor } = message.formDataObject;
-
-    debugger;
 
     // generated elements properties
     const tintNumber = 12;
