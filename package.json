@@ -4,6 +4,7 @@
   "description": "Your Figma Plugin",
   "main": "code.js",
   "scripts": {
+    "prebuild": "node index.js",
     "build": "esbuild code.ts --bundle --outfile=code.js",
     "dev": "esbuild code.ts --bundle --sourcemap --watch --outfile=code.js"
   },
@@ -12,10 +13,11 @@
   "devDependencies": {
     "@figma/plugin-typings": "^1.45.0",
     "esbuild": "^0.18.17",
+    "handlebars": "^4.7.8",
     "typescript": "*"
   },
   "dependencies": {
-    "@radix-ui/colors": "^1.0.1",
+    "@radix-ui/colors": "latest",
     "colortranslator": "^3.0.1"
   }
 }
