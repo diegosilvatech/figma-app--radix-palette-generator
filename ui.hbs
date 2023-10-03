@@ -114,37 +114,9 @@
     <div class="wrapper">
       <label for="color-name">Select a color:</label>
       <select name="colorName" id="color-name">
-        <option value="amber">Amber</option>
-        <option value="blue">Blue</option>
-        <option value="bronze">Bronze</option>
-        <option value="brown">Brown</option>
-        <option value="crimson">Crimson</option>
-        <option value="cyan">Cyan</option>
-        <option value="gold">Gold</option>
-        <option value="grass">Grass</option>
-        <option value="gray">Gray</option>
-        <option value="green">Green</option>
-        <option value="indigo">Indigo</option>
-        <option value="iris">Iris</option>
-        <option value="jade">Jade</option>
-        <option value="lime">Lime</option>
-        <option value="mauve">Mauve</option>
-        <option value="mint">Mint</option>
-        <option value="olive">Olive</option>
-        <option value="orange">Orange</option>
-        <option value="pink">Pink</option>
-        <option value="plum">Plum</option>
-        <option value="purple">Purple</option>
-        <option value="red">Red</option>
-        <option value="ruby">Ruby</option>
-        <option value="sage">Sage</option>
-        <option value="sand">Sand</option>
-        <option value="sky">Sky</option>
-        <option value="slate">Slate</option>
-        <option value="teal">Teal</option>
-        <option value="tomato">Tomato</option>
-        <option value="violet">Violet</option>
-        <option value="yellow">Yellow</option>
+        {{#each colors}}
+        <option value="{{value}}">{{name}}</option>
+        {{/each}}
       </select>
     </div>
 
