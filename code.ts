@@ -11,8 +11,6 @@ cleanColors.forEach(colorName => {
   palettes.alpha[colorName] = { light: colors[colorName + 'A'], dark: colors[colorName + 'DarkA'] };
 })
 
-console.log(palettes)
-
 const generateFills = (
   type,
   palettes,
