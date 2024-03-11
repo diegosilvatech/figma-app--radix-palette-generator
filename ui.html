@@ -18,7 +18,7 @@
 
   body {
     font-family: var(--font-family), sans-serif;
-    padding: 16px ;
+    padding: 16px;
     background-color: var(--background-color);
     overflow: hidden;
   }
@@ -73,7 +73,10 @@
     background-repeat: no-repeat;
     background-position: right 0.7rem top 50%;
     background-size: 0.65rem auto;
+
+
   }
+
 
   .wrapper select:active,
   .wrapper select:focus {
@@ -143,44 +146,52 @@
   }
 </style>
 
-<form id="plugin-form">
-  <h2>Radix UI Palette Generator</h2>
 
+
+<form id="plugin-form">
   <div class="fields-container">
     <div class="wrapper">
       <label class="label-form" for="color-name">Select color:</label>
       <select name="colorName" id="color-name">
-        <option value="amber">Amber</option>
-        <option value="blue">Blue</option>
-        <option value="bronze">Bronze</option>
-        <option value="brown">Brown</option>
-        <option value="crimson">Crimson</option>
-        <option value="cyan">Cyan</option>
-        <option value="gold">Gold</option>
-        <option value="grass">Grass</option>
-        <option value="gray">Gray</option>
-        <option value="green">Green</option>
-        <option value="indigo">Indigo</option>
-        <option value="iris">Iris</option>
-        <option value="jade">Jade</option>
-        <option value="lime">Lime</option>
-        <option value="mauve">Mauve</option>
-        <option value="mint">Mint</option>
-        <option value="olive">Olive</option>
-        <option value="orange">Orange</option>
-        <option value="pink">Pink</option>
-        <option value="plum">Plum</option>
-        <option value="purple">Purple</option>
-        <option value="red">Red</option>
-        <option value="ruby">Ruby</option>
-        <option value="sage">Sage</option>
-        <option value="sand">Sand</option>
-        <option value="sky">Sky</option>
-        <option value="slate">Slate</option>
-        <option value="teal">Teal</option>
-        <option value="tomato">Tomato</option>
-        <option value="violet">Violet</option>
-        <option value="yellow">Yellow</option>
+        <optgroup label="Grays">
+          <option value="gray" selected>Gray</option>
+          <option value="mauve">Mauve</option>
+          <option value="slate">Slate</option>
+          <option value="sage">Sage</option>
+          <option value="olive">Olive</option>
+          <option value="sand">Sand</option>
+        </optgroup>
+        <optgroup label="Colors">
+          <option value="tomato">Tomato</option>
+          <option value="red">Red</option>
+          <option value="ruby">Ruby</option>
+          <option value="crimson">Crimson</option>
+          <option value="pink">Pink</option>
+          <option value="plum">Plum</option>
+          <option value="purple">Purple</option>
+          <option value="violet">Violet</option>
+          <option value="iris">Iris</option>
+          <option value="indigo">Indigo</option>
+          <option value="blue">Blue</option>
+          <option value="cyan">Cyan</option>
+          <option value="teal">Teal</option>
+          <option value="jade">Jade</option>
+          <option value="green">Green</option>
+          <option value="grass">Grass</option>
+          <option value="orange">Orange</option>
+          <option value="brown">Brown</option>
+        </optgroup>
+        <optgroup label="Bright Colors">
+          <option value="sky">Sky</option>
+          <option value="mint">Mint</option>
+          <option value="lime">Lime</option>
+          <option value="yellow">Yellow</option>
+          <option value="amber">Amber</option>
+        </optgroup>
+        <optgroup label="Metals">
+          <option value="bronze">Bronze</option>
+          <option value="gold">Gold</option>
+        </optgroup>
       </select>
     </div>
 
