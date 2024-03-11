@@ -67,19 +67,19 @@ figma.ui.onmessage = (message: MessageProps) => {
   if (message.type === "action-generate") {
     const { colorName, colorType, themeColor } = message.formDataObject;
 
-    // generated elements properties
+    // ELEMENT PROPERTIES
     const tintNumber = 12;
     const circleSize = 80;
-    const circleSpacing = 16;
+    const circleSpacing = 24;
 
     const parentFrame = figma.createFrame();
     parentFrame.name = `${formatName(colorName)} ${formatName(themeColor)} ${colorType === "alpha" ? "Alpha" : "Solid"
       }`;
     parentFrame.layoutMode = "HORIZONTAL";
-    parentFrame.paddingTop = 16;
-    parentFrame.paddingRight = 16;
-    parentFrame.paddingBottom = 16;
-    parentFrame.paddingLeft = 16;
+    parentFrame.paddingTop = 24;
+    parentFrame.paddingRight = 24;
+    parentFrame.paddingBottom = 24;
+    parentFrame.paddingLeft = 24;
     parentFrame.itemSpacing = circleSpacing;
     parentFrame.primaryAxisSizingMode = "AUTO";
     parentFrame.counterAxisSizingMode = "AUTO";
@@ -93,10 +93,10 @@ figma.ui.onmessage = (message: MessageProps) => {
     );
 
     for (let index = 0; index < tintNumber; index++) {
-      // generated element shape
+      // ELEMENT SHAPE
       const tintNode = figma.createEllipse();
 
-      // generated element property
+      // ELEMENT PROPERTY
       const tintNodeName = `${formatName(colorName)}/${formatName(themeColor)}${colorType === "alpha" ? " Alpha" : ""
         }/${index + 1}`;
       tintNode.name = tintNodeName;
@@ -116,7 +116,7 @@ figma.ui.onmessage = (message: MessageProps) => {
       figma.currentPage.selection = selectFrame;
       figma.viewport.scrollAndZoomIntoView(selectFrame);
 
-      // generated element style
+      // ELEMENT STYLE
       const colorStyle = figma.createPaintStyle();
       const stylePaints: SolidPaint[] | Paint[] = generateFills(
         "SOLID",
