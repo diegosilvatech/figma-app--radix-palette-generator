@@ -1,61 +1,10 @@
-import * as colors from '@radix-ui/colors';
-import { ColorTranslator } from "colortranslator";
-import { formatName } from './src/helpers/formatName';
+import { formatName } from './src/helpers/formatters/formatName';
+import { createCardFrame } from './src/helpers/figma/cardFrame';
+import { getRadixPalettes } from './src/helpers/radix/getRadixPalettes';
+import { generateStyles } from './src/helpers/figma/generateStyles';
+import { MessageProps } from './src/types/types';
 
-
-const cleanColors = Object.keys(colors).filter(colorName => !colorName.includes('A') && !colorName.includes('Dark') && !colorName.includes('P3'));
-
-const palettes = { solid: {}, alpha: {} };
-cleanColors.forEach(colorName => {
-  palettes.solid[colorName] = { light: colors[colorName], dark: colors[colorName + 'Dark'] };
-  palettes.alpha[colorName] = { light: colors[colorName + 'A'], dark: colors[colorName + 'DarkA'] };
-})
-
-const generateFills = (
-  type,
-  palettes,
-  colorType: "solid" | "alpha",
-  colorName,
-  themeColor: "light" | "dark",
-  index
-): Paint[] => {
-  const isAlpha = colorType === "alpha";
-  const paletteKey = palettes[colorType];
-  let radixColorName = colorName;
-
-  if (isAlpha) {
-    radixColorName += "A";
-  }
-
-  const rgbaColorObject = new ColorTranslator(
-    paletteKey[colorName][themeColor][`${radixColorName}${index + 1}`]
-  );
-
-  const { r, g, b, a } = rgbaColorObject.RGBAObject;
-
-  return [
-    {
-      type,
-      color: {
-        r: r / 255,
-        g: g / 255,
-        b: b / 255,
-      },
-      opacity: a,
-    },
-  ];
-};
-
-type FormDataProps = {
-  colorName: string;
-  colorType: "solid" | "alpha";
-  themeColor: "light" | "dark";
-};
-
-type MessageProps = {
-  type: string;
-  formDataObject: FormDataProps;
-};
+const palettes = getRadixPalettes();
 
 figma.showUI(__html__, {
   width: 340,
@@ -66,59 +15,15 @@ figma.showUI(__html__, {
 figma.ui.onmessage = (message: MessageProps) => {
   if (message.type === "action-generate") {
     const { colorName, colorType, themeColor } = message.formDataObject;
+    const levelsAmount = 12;
 
-    // ELEMENT PROPERTIES
-    const tintNumber = 12;
-    const circleSize = 80;
-    const circleSpacing = 24;
-
-    const parentFrame = figma.createFrame();
-    parentFrame.name = `${formatName(colorName)} ${formatName(themeColor)} ${colorType === "alpha" ? "Alpha" : "Solid"
-      }`;
-    parentFrame.layoutMode = "HORIZONTAL";
-    parentFrame.paddingTop = 24;
-    parentFrame.paddingRight = 24;
-    parentFrame.paddingBottom = 24;
-    parentFrame.paddingLeft = 24;
-    parentFrame.itemSpacing = circleSpacing;
-    parentFrame.primaryAxisSizingMode = "AUTO";
-    parentFrame.counterAxisSizingMode = "AUTO";
-    parentFrame.fills = generateFills(
-      "SOLID",
-      palettes,
-      "solid",
-      "gray",
-      themeColor,
-      0
-    );
-
-    for (let index = 0; index < tintNumber; index++) {
-      // ELEMENT SHAPE
-      const tintNode = figma.createEllipse();
-
-      // ELEMENT PROPERTY
+    // CREATE LOCAL STYLES
+    for (let index = 0; index < levelsAmount; index++) {
       const tintNodeName = `${formatName(colorName)}/${formatName(themeColor)}${colorType === "alpha" ? " Alpha" : ""
         }/${index + 1}`;
-      tintNode.name = tintNodeName;
-      tintNode.resize(circleSize, circleSize);
-      tintNode.fills = generateFills(
-        "SOLID",
-        palettes,
-        colorType,
-        colorName,
-        themeColor,
-        index
-      );
-      parentFrame.appendChild(tintNode);
 
-      const selectFrame: FrameNode[] = [];
-      selectFrame.push(parentFrame);
-      figma.currentPage.selection = selectFrame;
-      figma.viewport.scrollAndZoomIntoView(selectFrame);
-
-      // ELEMENT STYLE
       const colorStyle = figma.createPaintStyle();
-      const stylePaints: SolidPaint[] | Paint[] = generateFills(
+      const stylePaints: SolidPaint[] | Paint[] = generateStyles(
         "SOLID",
         palettes,
         colorType,
