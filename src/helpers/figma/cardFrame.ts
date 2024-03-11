@@ -1,8 +1,18 @@
-import { convertHexToRgb } from '../colors/convertHexToRgb';
+import { formatName } from '../formatters/formatName';
+import { getColorTranslated } from '../colors/getColorTranslated';
 
-const createCardFrame = () => {
+const createCardFrame = (cardName, currentColor, colorType, colorName) => {
+  const colorFill = getColorTranslated('SOLID', '#ffcb00');
+
+  const isAlpha = colorType === "alpha";
+  let newColorName = cardName;
+
+  if (isAlpha) {
+    newColorName += "A";
+  }
+
   const cardFrame = figma.createFrame();
-  cardFrame.name = 'cardFrame';
+  cardFrame.name = formatName(cardName);
   cardFrame.layoutMode = 'VERTICAL';
   cardFrame.paddingTop = 8;
   cardFrame.paddingRight = 8;
@@ -11,7 +21,7 @@ const createCardFrame = () => {
   cardFrame.itemSpacing = 8;
   cardFrame.primaryAxisSizingMode = 'AUTO';
   cardFrame.counterAxisSizingMode = 'AUTO';
-  cardFrame.fills = [{ type: 'SOLID', color: convertHexToRgb('ffffff') }];
+  cardFrame.fills = colorFill;
 
   return cardFrame;
 };

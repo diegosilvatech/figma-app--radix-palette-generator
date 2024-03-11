@@ -2,23 +2,19 @@ import { ColorTranslator } from "colortranslator";
 
 const generateStyles = (
   type,
-  palettes,
+  currentColor,
   colorType: "solid" | "alpha",
   colorName,
-  themeColor: "light" | "dark",
-  index
 ): Paint[] => {
   const isAlpha = colorType === "alpha";
-  const paletteKey = palettes[colorType];
+
   let radixColorName = colorName;
 
   if (isAlpha) {
     radixColorName += "A";
   }
 
-  const rgbaColorObject = new ColorTranslator(
-    paletteKey[colorName][themeColor][`${radixColorName}${index + 1}`]
-  );
+  const rgbaColorObject = new ColorTranslator(currentColor);
 
   const { r, g, b, a } = rgbaColorObject.RGBAObject;
 
