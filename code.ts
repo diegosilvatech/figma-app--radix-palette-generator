@@ -57,7 +57,7 @@ type MessageProps = {
 
 figma.showUI(__html__, {
   width: 340,
-  height: 280,
+  height: 292,
   title: "Radix Palette Generator",
 });
 
