@@ -133,6 +133,6 @@ figma.ui.onmessage = (message: MessageProps) => {
 
     figma.closePlugin("Palette generated successfully! 👋🏽");
   } else if (message.type === "action-exit") {
-    figma.closePlugin("exit!");
+    figma.closePlugin("Bye! 👋🏽");
   }
 };
