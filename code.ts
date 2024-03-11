@@ -1,13 +1,17 @@
 import * as colors from '@radix-ui/colors';
 import { ColorTranslator } from "colortranslator";
+import { formatName } from './src/helpers/formatName';
+
 
 const cleanColors = Object.keys(colors).filter(colorName => !colorName.includes('A') && !colorName.includes('Dark') && !colorName.includes('P3'));
 
 const palettes = { solid: {}, alpha: {} };
 cleanColors.forEach(colorName => {
-  palettes.solid[colorName] = {light: colors[colorName], dark: colors[colorName + 'Dark']};
-  palettes.alpha[colorName] = {light: colors[colorName+ 'A'], dark: colors[colorName + 'DarkA']};
+  palettes.solid[colorName] = { light: colors[colorName], dark: colors[colorName + 'Dark'] };
+  palettes.alpha[colorName] = { light: colors[colorName + 'A'], dark: colors[colorName + 'DarkA'] };
 })
+
+console.log(palettes)
 
 const generateFills = (
   type,
@@ -71,9 +75,8 @@ figma.ui.onmessage = (message: MessageProps) => {
     const circleSpacing = 16;
 
     const parentFrame = figma.createFrame();
-    parentFrame.name = `${colorName}-${themeColor}${
-      colorType === "alpha" ? "Alpha" : ""
-    }`;
+    parentFrame.name = `${formatName(colorName)} ${formatName(themeColor)} ${colorType === "alpha" ? "Alpha" : "Solid"
+      }`;
     parentFrame.layoutMode = "HORIZONTAL";
     parentFrame.paddingTop = 16;
     parentFrame.paddingRight = 16;
@@ -86,7 +89,7 @@ figma.ui.onmessage = (message: MessageProps) => {
       "SOLID",
       palettes,
       "solid",
-      "mauve",
+      "gray",
       themeColor,
       0
     );
@@ -96,9 +99,8 @@ figma.ui.onmessage = (message: MessageProps) => {
       const tintNode = figma.createEllipse();
 
       // generated element property
-      const tintNodeName = `${colorName}/${themeColor}${
-        colorType === "alpha" ? "Alpha" : ""
-      }/${index + 1}`;
+      const tintNodeName = `${formatName(colorName)}/${formatName(themeColor)}${colorType === "alpha" ? " Alpha" : ""
+        }/${index + 1}`;
       tintNode.name = tintNodeName;
       tintNode.resize(circleSize, circleSize);
       tintNode.fills = generateFills(
