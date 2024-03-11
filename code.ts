@@ -131,7 +131,7 @@ figma.ui.onmessage = (message: MessageProps) => {
       colorStyle.paints = stylePaints;
     }
 
-    figma.closePlugin("Tints generated successfully!");
+    figma.closePlugin("Palette generated successfully! 👋🏽");
   } else if (message.type === "action-exit") {
     figma.closePlugin("exit!");
   }
