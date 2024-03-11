@@ -2,14 +2,18 @@ import { formatName } from '../formatters/formatName';
 import { getColorTranslated } from '../colors/getColorTranslated';
 
 const createCardFrame = (cardName, currentColor, colorType, colorName) => {
-  const colorFill = getColorTranslated('SOLID', '#ffcb00');
+  const colorFill = getColorTranslated('SOLID', currentColor);
 
-  const isAlpha = colorType === "alpha";
-  let newColorName = cardName;
+  // IF IS ALPHA
+  // const isAlpha = colorType === "alpha";
 
-  if (isAlpha) {
-    newColorName += "A";
-  }
+  // console.log('isAlpha', isAlpha);
+
+  // let newColorName = cardName;
+
+  // if (isAlpha) {
+  //   newColorName += "A";
+  // }
 
   const cardFrame = figma.createFrame();
   cardFrame.name = formatName(cardName);

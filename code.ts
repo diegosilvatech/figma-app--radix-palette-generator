@@ -1,18 +1,24 @@
 import { formatName } from './src/helpers/formatters/formatName';
-import { createCardFrame } from './src/helpers/figma/cardFrame';
+import { createCardFrame } from './src/helpers/figma/cardCardFrame';
 import { getRadixPalettes } from './src/helpers/radix/getRadixPalettes';
 import { generateStyles } from './src/helpers/figma/generateStyles';
 import { MessageProps } from './src/types/types';
 import { getColorTranslated } from './src/helpers/colors/getColorTranslated';
 
+const palettes = getRadixPalettes();
 
 const getCurrentColor = (colorType, colorName, themeColor, index) => {
-  const currentColor = palettes[colorType][colorName][themeColor][`${colorName}${index + 1}`];
+  const newColorName = colorType === "alpha" ? colorName+'A' : colorName;
+
+  console.log('colorType', colorType);
+  console.log('colorName', colorName);
+  console.log('themeColor', themeColor);
+  console.log('index', index);
+
+  const currentColor = palettes[colorType][colorName][themeColor][`${newColorName}${index + 1}`];
 
   return currentColor;
 }
-
-const palettes = getRadixPalettes();
 
 figma.showUI(__html__, {
   width: 340,
@@ -29,7 +35,7 @@ figma.ui.onmessage = (message: MessageProps) => {
     // CREATE PARENT FRAME
     const parentFrameName = `${formatName(colorName)} ${formatName(themeColor)} ${formatName(colorType)}`;
 
-    const parentFrameColor = getColorTranslated('SOLID', '#ffaabc80');
+    const parentFrameColor = getColorTranslated('SOLID', '#ffcb00');
 
     const parentFrame = figma.createFrame();
     parentFrame.name = parentFrameName;
@@ -44,38 +50,60 @@ figma.ui.onmessage = (message: MessageProps) => {
     parentFrame.counterAxisSizingMode = "AUTO";
     parentFrame.fills = parentFrameColor;
 
-    for (let index = 0; index < levelsAmount; index++) {
-      const currentColor = getCurrentColor(colorType, colorName, themeColor, index);
+    // IF IS SOLID
+    if (colorType === 'solid') {
+      console.log('IS SOLID');
 
-      // CREATE CARD FRAME
-      const cardName = `${formatName(colorName)} ${formatName(themeColor)} ${formatName(colorType)} - ${index + 1}`;
+      for (let index = 0; index < levelsAmount; index++) {
+        const currentColor = getCurrentColor(colorType, colorName, themeColor, index);
 
-      const cardFrame = createCardFrame(cardName, currentColor, colorType, colorName);
+        // CREATE CARD FRAME
+        const cardName = `${formatName(colorName)} ${formatName(themeColor)} ${formatName(colorType)} - ${index + 1}`;
 
-      parentFrame.appendChild(cardFrame);
+        const cardFrame = createCardFrame(cardName, currentColor, colorType, colorName);
 
-      // SELECT PARENT FRAME
-      const selectFrame: FrameNode[] = [];
-      selectFrame.push(parentFrame);
-      figma.currentPage.selection = selectFrame;
-      figma.viewport.scrollAndZoomIntoView(selectFrame);
+        parentFrame.appendChild(cardFrame);
 
-      // CREATE LOCAL STYLES
-      const tintNodeName = `${formatName(colorName)}/${formatName(themeColor)}${colorType === "alpha" ? " Alpha" : ""
-        }/${index + 1}`;
+        // SELECT PARENT FRAME
+        const selectFrame: FrameNode[] = [];
+        selectFrame.push(parentFrame);
+        figma.currentPage.selection = selectFrame;
+        figma.viewport.scrollAndZoomIntoView(selectFrame);
 
-      const colorStyle = figma.createPaintStyle();
-      const stylePaints: SolidPaint[] | Paint[] = generateStyles(
-        "SOLID",
-        currentColor,
-        colorType,
-        colorName,
-      );
-      colorStyle.name = tintNodeName;
-      colorStyle.paints = stylePaints;
+        // CREATE LOCAL STYLES
+        // const tintNodeName = `${formatName(colorName)}/${formatName(themeColor)}${colorType === "alpha" ? " Alpha" : ""
+        //   }/${index + 1}`;
+        const tintNodeName = `${formatName(colorName)}/${formatName(themeColor)}/${index + 1}`;
+
+        const colorStyle = figma.createPaintStyle();
+        const stylePaints: SolidPaint[] | Paint[] = generateStyles(
+          "SOLID",
+          currentColor,
+          colorType,
+          colorName,
+        );
+        colorStyle.name = tintNodeName;
+        colorStyle.paints = stylePaints;
+      }
     }
 
+    // IF IS ALPHA
+    let alphaColorName = colorName;
 
+    if (colorType === "alpha") {
+
+      for (let index = 0; index < levelsAmount; index++) {
+        const currentColor = getCurrentColor(colorType, colorName, themeColor, index);
+
+        const cardName = 'CARD NAME ALPHA TEST';
+
+        const cardFrame = createCardFrame(cardName, currentColor, colorType, alphaColorName);
+
+        parentFrame.appendChild(cardFrame);
+      }
+      // CREATE CARD FRAME
+      // const cardName = `${formatName(colorName)} ${formatName(themeColor)} ${formatName(colorType)} - ${index + 1}`;
+    }
 
     figma.closePlugin("Palette generated successfully! 👋🏽");
   } else if (message.type === "action-exit") {
