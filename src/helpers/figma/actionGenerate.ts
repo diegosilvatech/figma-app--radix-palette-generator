@@ -13,13 +13,14 @@ const actionGenerate = (formDataObject) => {
   const paletteColorsAmount = 12;
   const parentFrame = createParentFrame(colorName, themeColor, colorType);
 
+  // for (let index = 0; index < paletteColorsAmount; index++) {
   for (let index = 0; index < paletteColorsAmount; index++) {
     const currentColor = getCurrentColor(colorType, colorName, themeColor, index);
 
     // CREATE CARD FRAME
     const cardName = `${formatName(colorName)} ${formatName(themeColor)} ${formatName(colorType)} - ${index + 1}`;
-    const cardFrame = createColorFrame(cardName, currentColor, colorName);
-    parentFrame.appendChild(cardFrame);
+    // const cardFrame = createColorFrame(cardName, currentColor, colorName);
+    // parentFrame.appendChild(cardFrame);
 
     // SELECT PARENT FRAME
     const selectFrame: FrameNode[] = [];
@@ -39,7 +40,7 @@ const actionGenerate = (formDataObject) => {
     colorStyle.name = tintNodeName;
     colorStyle.paints = stylePaints;
 
-    // CREATE TEXTS
+    // LOAD FONTS
   }
   figma.closePlugin("Palette generated successfully! 👋🏽");
 }

@@ -4,7 +4,8 @@ import { formatName } from "../formatters/formatName";
 const createParentFrame = (colorName, themeColor, colorType) => {
   const parentFrameName = `${formatName(colorName)} ${formatName(themeColor)} ${formatName(colorType)}`;
 
-  const parentFrameBackgroundColor = getColorTranslated('SOLID', '#ffffff00');
+  const parentFrameBackgroundColor = getColorTranslated('SOLID', '#ffffff', false);
+  console.log('parentFrameBackgroundColor', parentFrameBackgroundColor)
 
   const parentFrame = figma.createFrame();
   parentFrame.name = parentFrameName;

@@ -1,5 +1,4 @@
 import { createText } from "../fonts/createText";
-import { loadFont } from "../fonts/loadFont";
 import { getColorTranslated } from "../helpers/colors/getColorTranslated";
 import { createContrastDataFrame } from "./createContrastDataFrame";
 import { createContrastInfoFrame } from "./createContrastInfoFrame";
