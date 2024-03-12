@@ -1,4 +1,4 @@
-import { hex, score, rgb } from 'wcag-contrast';
+import { hex, score } from 'wcag-contrast';
 
 const getColorClassification = (classification: string) => {
   if (classification === 'AAA') {
@@ -12,21 +12,40 @@ const getColorClassification = (classification: string) => {
   }
 };
 
-const checkContrast = (primaryColor: string, secondaryColor: string) => {
-  const contrastScore = hex(primaryColor, secondaryColor);
-  const contrastClassification = score(contrastScore);
+const checkContrast = (colorHex) => {
+  const contrastScore = hex(colorHex, '#000000');
+  const colorWithBetterContrast = contrastScore < 7.1 ? '#ffffff' : '#000000';
+  const newContrastScore = hex(colorHex, colorWithBetterContrast);
 
-  const colorContrast = {
+  const contrastClassification = score(newContrastScore);
+
+  const colorContrastClassification = {
     score: contrastScore.toFixed(2),
     classification: contrastClassification,
     color: getColorClassification(contrastClassification)
   };
-  return colorContrast;
+  return colorContrastClassification;
 };
 
-const getColorWithBetterContrast = (colorHex) => {
-  const contrastScore = hex(colorHex, '#000000');
-  const colorWithBetterContrast = contrastScore < 7.1 ? '#ffffff' : '#000000';
+const getColorWithBetterContrast = (colorHex, colorType) => {
+
+  const colorSolidDark = '#ffffff';
+  const colorSolidLight = '#000000';
+
+  const colorAlphaDark = '#000000';
+  const colorAlphaLight = '#ffffff';
+
+  let contrastScore;
+
+  let colorWithBetterContrast = '';
+
+  if (colorType === 'solid') {
+    contrastScore = hex(colorHex, colorSolidLight);
+    colorWithBetterContrast = contrastScore < 7.1 ? colorSolidDark : colorSolidLight;
+  } else {
+    contrastScore = hex(colorHex, colorAlphaDark);
+    colorWithBetterContrast = contrastScore < 7.1 ? colorAlphaDark : colorAlphaLight;
+  }
 
   return colorWithBetterContrast;
 };

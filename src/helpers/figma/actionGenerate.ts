@@ -1,7 +1,9 @@
 import { createText } from "../../fonts/createText";
 import { getApplicationTextContext } from "../../fonts/getApplicationTextContext";
 import { loadFont } from "../../fonts/loadFont";
+import { createContrastClassificationFrame } from "../../frames/createContrastClassificationFrame";
 import { createColorInfoFrame } from "../../frames/createColorInfoFrame";
+import { createContrastInfoFrame } from "../../frames/createContrastInfoFrame";
 import { createTintFrame } from "../../frames/createTintFrame";
 import { getColorHex } from "../colors/getColorHex";
 import { checkContrast, getColorWithBetterContrast } from "../contrast/checkContrast";
@@ -45,7 +47,8 @@ const actionGenerate = async (formDataObject) => {
 
     // TEXT DATA
     const applicationText = getApplicationTextContext(colorLevel);
-    const colorText = getColorWithBetterContrast(colorHex);
+    const colorText = getColorWithBetterContrast(colorHex, colorType);
+    const scoreText = checkContrast(colorHex).classification;
 
 
     // APPEND FRAMES
@@ -53,8 +56,12 @@ const actionGenerate = async (formDataObject) => {
     parentFrame.appendChild(colorFrame);
     const tintFrame = createTintFrame(colorHex);
     colorFrame.appendChild(tintFrame);
+    const contrastInfoFrame = createContrastInfoFrame(colorHex);
+    tintFrame.appendChild(contrastInfoFrame);
     const colorInfoFrame = createColorInfoFrame(colorHex);
     tintFrame.appendChild(colorInfoFrame);
+    const contrastClassificationFrame = createContrastClassificationFrame(colorHex);
+    contrastInfoFrame.appendChild(contrastClassificationFrame);
 
     // LOAD FONTS
     await loadFont().then(() => {
@@ -87,10 +94,22 @@ const actionGenerate = async (formDataObject) => {
         opacity: 0.6
       });
 
+      const classificationScoreText = createText({
+        family: 'Inter',
+        style: 'Medium',
+        size: 4,
+        case: 'UPPER',
+        characters: scoreText,
+        color: colorText
+      });
+
       // APPEND TEXTS
       colorInfoFrame.appendChild(colorApplicationText);
       colorInfoFrame.appendChild(colorNameText);
       colorInfoFrame.appendChild(colorHexText);
+      
+      // contrastInfoFrame.appendChild(classificationScoreText);
+      contrastClassificationFrame.appendChild(classificationScoreText);
     });
   }
 

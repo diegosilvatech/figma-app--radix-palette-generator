@@ -10,7 +10,7 @@ const createTintFrame = (colorHex) => {
   const tintFrameHeight = 120;
   tintFrame.layoutMode = 'VERTICAL';
   tintFrame.resize(tintFrameWidth, tintFrameHeight);
-  tintFrame.primaryAxisAlignItems = 'MAX';
+  tintFrame.primaryAxisAlignItems = 'SPACE_BETWEEN';
   tintFrame.counterAxisAlignItems = 'MIN';
   tintFrame.paddingTop = 6;
   tintFrame.paddingRight = 6;
