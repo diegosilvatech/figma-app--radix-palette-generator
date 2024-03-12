@@ -2,7 +2,7 @@ import { generateFillColor } from "../colors/generateFillColor";
 import { formatName } from "../formatters/formatName";
 
 const createParentFrame = (colorName, colorTheme, colorType) => {
-  const parentFrameName = `${formatName(colorName)} ${formatName(colorTheme)} ${formatName(colorType)}`;
+  const parentFrameName = `${formatName(colorName)} ${formatName(colorTheme)} - ${formatName(colorType)}`;
 
   const fillColor = generateFillColor('SOLID', '#ffffff', false);
 
