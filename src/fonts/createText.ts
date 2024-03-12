@@ -1,7 +1,5 @@
 import { generateFillColor } from "../helpers/colors/generateFillColor";
 
-const fillColor = generateFillColor('SOLID', '#FF00FF');
-
 type TextCaseTypes = 'LOWER' | 'ORIGINAL' | 'TITLE' | 'UPPER';
 
 type FontProps = {
@@ -15,6 +13,8 @@ type FontProps = {
 };
 
 const createText = (font: FontProps) => {
+  const fillColor = generateFillColor('SOLID', font.color);
+
   const text = figma.createText();
 
   text.fontName = { family: font.family, style: font.style };

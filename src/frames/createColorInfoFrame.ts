@@ -1,16 +1,14 @@
 import { generateFillColor } from "../helpers/colors/generateFillColor";
 
-const createContrastDataFrame = (colorHex) => {
-  const fillColor = generateFillColor('SOLID', colorHex);
+const createColorInfoFrame = (colorHex) => {
+  const fillColor = generateFillColor('SOLID', '#ff00ff');
   const contrastDataFrame = figma.createFrame();
-  contrastDataFrame.name = 'Contrast Data Frame';
+  contrastDataFrame.name = 'Contrast Info';
   contrastDataFrame.layoutMode = 'HORIZONTAL';
   contrastDataFrame.primaryAxisSizingMode = 'FIXED';
   contrastDataFrame.primaryAxisAlignItems = 'SPACE_BETWEEN';
   contrastDataFrame.counterAxisAlignItems = 'CENTER';
   contrastDataFrame.counterAxisSizingMode = 'FIXED';
-  // contrastDataFrame.paddingLeft = 4;
-  // contrastDataFrame.itemSpacing = 4;
   contrastDataFrame.resize(108, 20);
 
   contrastDataFrame.fills = fillColor;
@@ -18,4 +16,4 @@ const createContrastDataFrame = (colorHex) => {
   return contrastDataFrame;
 };
 
-export { createContrastDataFrame };
+export { createColorInfoFrame };

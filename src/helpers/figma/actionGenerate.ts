@@ -1,6 +1,6 @@
 import { createText } from "../../fonts/createText";
 import { loadFont } from "../../fonts/loadFont";
-import { createContrastDataFrame } from "../../frames/createContrastDataFrame";
+import { createColorInfoFrame } from "../../frames/createColorInfoFrame";
 import { createTintFrame } from "../../frames/createTintFrame";
 import { getColorHex } from "../colors/getColorHex";
 import { formatName } from "../formatters/formatName";
@@ -8,7 +8,7 @@ import { createColorFrame } from "./createColorFrame";
 import { createParentFrame } from "./createParentFrame";
 import { generateStyles } from "./generateStyles";
 
-const actionGenerate = (formDataObject) => {
+const actionGenerate = async (formDataObject) => {
 
   const { colorType, colorTheme, colorName } = formDataObject;
   const paletteColorsAmount = 12;
@@ -46,8 +46,25 @@ const actionGenerate = (formDataObject) => {
     parentFrame.appendChild(colorFrame);
     const tintFrame = createTintFrame(colorHex);
     colorFrame.appendChild(tintFrame);
+    const colorInfoFrame = createColorInfoFrame(colorHex);
+    tintFrame.appendChild(colorInfoFrame);
 
+    // LOAD FONTS
+    await loadFont().then(() => {
+      const colorHexText = createText({
+        family: 'Inter',
+        style: 'Semi Bold',
+        size: 6,
+        case: 'UPPER',
+        characters: colorHex,
+        color: '#ffcb00'
+      });
+      // APPEND TEXTS
+      colorInfoFrame.appendChild(colorHexText);
+    });
   }
+
+
   figma.closePlugin("Palette generated successfully! 👋🏽");
 }
 
