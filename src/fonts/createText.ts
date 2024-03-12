@@ -1,6 +1,6 @@
 import { generateFillColor } from "../helpers/colors/generateFillColor";
 
-const colorFill = generateFillColor('SOLID', '#FF00FF');
+const fillColor = generateFillColor('SOLID', '#FF00FF');
 
 type TextCaseTypes = 'LOWER' | 'ORIGINAL' | 'TITLE' | 'UPPER';
 
@@ -21,7 +21,7 @@ const createText = (font: FontProps) => {
   text.fontSize = font.size;
   text.textCase = font.case;
   text.characters = font.characters;
-  text.fills = colorFill;
+  text.fills = fillColor;
   text.opacity = font.opacity || 1;
 
   return text;

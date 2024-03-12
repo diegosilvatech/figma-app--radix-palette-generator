@@ -4,13 +4,13 @@ const createContrastInfoFrame = (
   // textColor,
   currentColor
 ) => {
-  const colorFill = generateFillColor('SOLID', currentColor);
+  const fillColor = generateFillColor('SOLID', currentColor);
 
   const contrastInfoFrame = figma.createFrame();
   contrastInfoFrame.name = 'Contrast Info Frame';
   contrastInfoFrame.layoutMode = 'HORIZONTAL';
   contrastInfoFrame.resize(108, 20);
-  contrastInfoFrame.fills = colorFill;
+  contrastInfoFrame.fills = fillColor;
   contrastInfoFrame.counterAxisAlignItems = 'CENTER';
 
   return contrastInfoFrame;

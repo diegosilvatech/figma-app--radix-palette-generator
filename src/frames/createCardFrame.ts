@@ -2,7 +2,7 @@ import { generateFillColor } from '../helpers/colors/generateFillColor';
 import { formatName } from '../helpers/formatters/formatName';
 
 const createCardFrame = (cardName) => {
-  const colorFill = generateFillColor('SOLID', '#ffffff');
+  const fillColor = generateFillColor('SOLID', '#ffffff');
 
   const cardFrame = figma.createFrame();
   cardFrame.name = formatName(cardName);
@@ -14,7 +14,7 @@ const createCardFrame = (cardName) => {
   cardFrame.itemSpacing = 8;
   cardFrame.primaryAxisSizingMode = 'AUTO';
   cardFrame.counterAxisSizingMode = 'AUTO';
-  cardFrame.fills = colorFill;
+  cardFrame.fills = fillColor;
 
   return cardFrame;
 };

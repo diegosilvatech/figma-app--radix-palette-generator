@@ -1,7 +1,7 @@
 import { generateFillColor } from "../helpers/colors/generateFillColor";
 
 const createContrastDataFrame = (currentColor) => {
-  const colorFill = generateFillColor('SOLID', currentColor);
+  const fillColor = generateFillColor('SOLID', currentColor);
   const contrastDataFrame = figma.createFrame();
   contrastDataFrame.name = 'Contrast Data Frame';
   contrastDataFrame.layoutMode = 'HORIZONTAL';
@@ -13,7 +13,7 @@ const createContrastDataFrame = (currentColor) => {
   // contrastDataFrame.itemSpacing = 4;
   contrastDataFrame.resize(108, 20);
 
-  contrastDataFrame.fills = colorFill;
+  contrastDataFrame.fills = fillColor;
 
   return contrastDataFrame;
 };

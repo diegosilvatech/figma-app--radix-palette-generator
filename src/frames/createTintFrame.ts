@@ -4,7 +4,7 @@ import { createContrastDataFrame } from "./createContrastDataFrame";
 import { createContrastInfoFrame } from "./createContrastInfoFrame";
 
 const createTintFrame = (currentColor, colorName) => {
-  const colorFill = generateFillColor('SOLID', currentColor);
+  const fillColor = generateFillColor('SOLID', currentColor);
 
   const tintFrame = figma.createFrame();
   tintFrame.name = 'Tint Frame';
@@ -19,7 +19,7 @@ const createTintFrame = (currentColor, colorName) => {
   tintFrame.paddingRight = 6;
   tintFrame.paddingBottom = 6;
   tintFrame.paddingLeft = 6;
-  tintFrame.fills = colorFill;
+  tintFrame.fills = fillColor;
 
   return tintFrame;
 };
