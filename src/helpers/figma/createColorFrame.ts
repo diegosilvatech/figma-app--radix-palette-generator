@@ -1,9 +1,9 @@
 import { createCardFrame } from '../../frames/createCardFrame';
 import { createTintFrame } from '../../frames/createTintFrame';
 
-const createColorFrame = (cardName, currentColor, colorName) => {
+const createColorFrame = (cardName, colorHex, colorName) => {
   const cardFrame = createCardFrame(cardName);
-  const tintFrame = createTintFrame(currentColor, colorName);
+  const tintFrame = createTintFrame(colorHex, colorName);
 
   // APPEND CHILDS
   cardFrame.appendChild(tintFrame);

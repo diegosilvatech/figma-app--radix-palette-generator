@@ -2,7 +2,7 @@ import { ColorTranslator } from "colortranslator";
 
 const generateStyles = (
   type,
-  currentColor,
+  colorHex,
   colorType: "solid" | "alpha",
   colorName,
 ): Paint[] => {
@@ -14,7 +14,7 @@ const generateStyles = (
     radixColorName += "A";
   }
 
-  const rgbaColorObject = new ColorTranslator(currentColor);
+  const rgbaColorObject = new ColorTranslator(colorHex);
 
   const { r, g, b, a } = rgbaColorObject.RGBAObject;
 

@@ -1,7 +1,8 @@
 import { createText } from "../../fonts/createText";
 import { loadFont } from "../../fonts/loadFont";
 import { createContrastDataFrame } from "../../frames/createContrastDataFrame";
-import { getCurrentColor } from "../colors/getCurrentColor";
+import { createTintFrame } from "../../frames/createTintFrame";
+import { getColorHex } from "../colors/getColorHex";
 import { formatName } from "../formatters/formatName";
 import { createColorFrame } from "./createColorFrame";
 import { createParentFrame } from "./createParentFrame";
@@ -13,14 +14,11 @@ const actionGenerate = (formDataObject) => {
   const paletteColorsAmount = 12;
   const parentFrame = createParentFrame(colorName, colorTheme, colorType);
 
-  // for (let index = 0; index < paletteColorsAmount; index++) {
   for (let index = 0; index < paletteColorsAmount; index++) {
-    const currentColor = getCurrentColor(colorType, colorName, colorTheme, index);
+    const colorHex = getColorHex(colorType, colorName, colorTheme, index);
 
     // CREATE CARD FRAME
     const cardName = `${formatName(colorName)} ${formatName(colorTheme)} ${formatName(colorType)} - ${index + 1}`;
-    // const cardFrame = createColorFrame(cardName, currentColor, colorName);
-    // parentFrame.appendChild(cardFrame);
 
     // SELECT PARENT FRAME
     const selectFrame: FrameNode[] = [];
@@ -33,14 +31,17 @@ const actionGenerate = (formDataObject) => {
     const colorStyle = figma.createPaintStyle();
     const stylePaints: SolidPaint[] | Paint[] = generateStyles(
       "SOLID",
-      currentColor,
+      colorHex,
       colorType,
       colorName,
     );
     colorStyle.name = tintNodeName;
     colorStyle.paints = stylePaints;
 
-    // LOAD FONTS
+    // APPEND FRAMES
+    const cardFrame = createColorFrame(cardName, colorHex, colorName);
+    parentFrame.appendChild(cardFrame);
+    // const tintFrame = createTintFrame()
   }
   figma.closePlugin("Palette generated successfully! 👋🏽");
 }

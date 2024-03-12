@@ -1,7 +1,7 @@
 import { generateFillColor } from "../helpers/colors/generateFillColor";
 
-const createContrastDataFrame = (currentColor) => {
-  const fillColor = generateFillColor('SOLID', currentColor);
+const createContrastDataFrame = (colorHex) => {
+  const fillColor = generateFillColor('SOLID', colorHex);
   const contrastDataFrame = figma.createFrame();
   contrastDataFrame.name = 'Contrast Data Frame';
   contrastDataFrame.layoutMode = 'HORIZONTAL';
