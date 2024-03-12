@@ -1,18 +1,89 @@
 <style>
-  @import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
+  @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-  body {
-    font-family: "Oxygen", sans-serif;
-    padding: 16px 16px 0;
+  :root {
+    --background-color: #2A2A2A;
+    --primary-color: #0090FF;
+    --primary-color-hover: #3B9EFF;
+    --text-primary-color: #EEEEEE;
+    --text-secondary-color: #B4B4B4;
+    --border-color: #3A3A3A;
+    --border-radius-sm: 2px;
+    --border-radius: 6px;
+    --font-family: "Inter";
+    --white: #ffffff;
   }
-
-  input {
-    accent-color: #161616;
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: var(--font-family), sans-serif;
+    padding: 16px;
+    background-color: var(--background-color);
+    overflow: hidden;
   }
 
   h2 {
     font-size: 16;
-    color: #171717;
+    color: var(--text-primary-color);
+  }
+
+  .input-label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 64px;
+  }
+
+  input[type='radio'] {
+    display: none;
+  }
+
+  .custom-radio {
+    border: 2px solid var(--primary-color);
+    width: 16px;
+    height: 16px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+  }
+
+  .custom-radio,
+  span {
+    transition: 0.3s ease;
+    color: var(--primary-color);
+    background-color: var(--primary-color);
+  }
+
+  .custom-radio span {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--primary-color);
+    border-radius: 50%;
+  }
+
+  input[type='radio']:checked+.custom-radio {
+    border-color: var(--primary-color);
+  }
+
+  input[type='radio']:checked+.custom-radio span {
+    background: var(--white);
+    box-shadow: rgba(0, 0, 0, 0.117647) 0 0 .8vw 0, rgba(0, 0, 0, 0.239216) 0 .8vw .8vw 0;
+  }
+
+  .label-form {
+    color: var(--text-secondary-color);
+    margin-bottom: 4px;
+  }
+
+  .margin-top {
+    margin-top: 8px;
   }
 
   .fields-container {
@@ -24,146 +95,183 @@
 
   .wrapper {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
   }
 
   .wrapper label {
-    font-size: 12;
-    color: #6f6f6f;
+    font-size: 13;
+    color: var(--text-secondary-color);
   }
 
   .wrapper select {
-    font-size: 12;
-    font-family: "Oxygen", sans-serif;
-    width: 120;
-    height: 32;
-    border-width: 1;
-    padding: 4px;
-    border-radius: 4px;
+    font-size: 13;
+    font-family: var(--font-family), sans-serif;
+    width: 100%;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary-color);
+    position: relative;
+
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Pro 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2024 Fonticons, Inc.--><path d="M239 401c9.4 9.4 24.6 9.4 33.9 0L465 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-175 175L81 175c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9L239 401z" fill="%23B4B4B4"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.7rem top 50%;
+    background-size: 0.65rem auto;
   }
 
   .wrapper select:active,
   .wrapper select:focus {
-    border-color: #e03177;
-    outline-color: #e03177;
+    border-color: #ffffff20;
+    outline-color: #ffffff20;
   }
 
   .radio-group-wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 8px 0 8px 8px;
-
-    width: 120;
-  }
-
-  .radio-option-wrapper {
-    display: flex;
-    align-items: center;
-  }
-
-  .radio-option-wrapper label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 0;
-    padding: 0;
-    color: #171717;
-    cursor: pointer;
+    padding: 8px 0px;
+    gap: 60px;
+    width: 100%;
   }
 
   .buttons-wrapper {
     display: flex;
     justify-content: space-between;
+    gap: 8px;
   }
 
   .button-primary {
+    font-family: var(--font-family), sans-serif;
     background-color: #232323;
-    color: white;
-    font-family: "Oxygen", sans-serif;
+    color: var(--white);
     border: 1px solid #232323;
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
+    width: 100%;
+    background-color: var(--primary-color);
   }
+
   .button-primary:hover {
-    background-color: #e03177;
-    border-color: #e03177;
+    background-color: var(--primary-color-hover);
     cursor: pointer;
+    transition: background-color 0.3s;
   }
 
   .button-secondary {
-    background-color: white;
-    color: #232323;
-    font-family: "Oxygen", sans-serif;
+    background-color: #FFFFFF12;
+    color: var(--text-secondary-color);
+    font-family: var(--font-family), sans-serif;
     border: 1px solid #232323;
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
+    width: 100%;
   }
+
   .button-secondary:hover {
-    color: #e03177;
-    border-color: #e03177;
     cursor: pointer;
+    color: var(--text-primary-color);
   }
 </style>
 
 <form id="plugin-form">
-  <h2>Radix UI Palette Generator</h2>
-
   <div class="fields-container">
     <div class="wrapper">
-      <label for="color-name">Select a color:</label>
+      <label class="label-form" for="color-name">Select color:</label>
       <select name="colorName" id="color-name">
-        {{#each colors}}
-        <option value="{{value}}">{{name}}</option>
-        {{/each}}
+        <optgroup label="Grays">
+          <option value="gray" selected>Gray</option>
+          <option value="mauve">Mauve</option>
+          <option value="slate">Slate</option>
+          <option value="sage">Sage</option>
+          <option value="olive">Olive</option>
+          <option value="sand">Sand</option>
+        </optgroup>
+        <optgroup label="Colors">
+          <option value="tomato">Tomato</option>
+          <option value="red">Red</option>
+          <option value="ruby">Ruby</option>
+          <option value="crimson">Crimson</option>
+          <option value="pink">Pink</option>
+          <option value="plum">Plum</option>
+          <option value="purple">Purple</option>
+          <option value="violet">Violet</option>
+          <option value="iris">Iris</option>
+          <option value="indigo">Indigo</option>
+          <option value="blue">Blue</option>
+          <option value="cyan">Cyan</option>
+          <option value="teal">Teal</option>
+          <option value="jade">Jade</option>
+          <option value="green">Green</option>
+          <option value="grass">Grass</option>
+          <option value="orange">Orange</option>
+          <option value="brown">Brown</option>
+        </optgroup>
+        <optgroup label="Bright Colors">
+          <option value="sky">Sky</option>
+          <option value="mint">Mint</option>
+          <option value="lime">Lime</option>
+          <option value="yellow">Yellow</option>
+          <option value="amber">Amber</option>
+        </optgroup>
+        <optgroup label="Metals">
+          <option value="bronze">Bronze</option>
+          <option value="gold">Gold</option>
+        </optgroup>
       </select>
     </div>
 
-    <div class="wrapper">
-      <label>Select a color type:</label>
+    <div class="wrapper label-form margin-top">
+      <label>Select type:</label>
       <div class="radio-group-wrapper">
-        <div class="radio-option-wrapper">
-          <label for="solid">
-            <input type="radio" name="colorType" id="solid" checked />
-            Solid
-          </label>
-        </div>
-        <div class="radio-option-wrapper">
-          <label for="alpha">
-            <input type="radio" name="colorType" id="alpha" />
-            Alpha
-          </label>
-        </div>
+        <label for="solid" class="input-label">
+          <input type="radio" name="colorType" id="solid" checked class="input-radio" />
+          <div class="custom-radio">
+            <span></span>
+          </div>
+          Solid
+        </label>
+        <label for="alpha" class="input-label">
+          <input type="radio" name="colorType" id="alpha" class="input-radio" />
+          <div class="custom-radio">
+            <span></span>
+          </div>
+          Alpha
+        </label>
       </div>
     </div>
 
     <input type="hidden" name="colorType" value="solid" />
 
-    <div class="wrapper">
-      <label>Select a theme:</label>
+    <div class="wrapper label-form margin-top">
+      <label>Select theme:</label>
       <div class="radio-group-wrapper">
-        <div class="radio-option-wrapper">
-          <label for="light">
-            <input type="radio" name="theme" id="light" checked />
-            Light
-          </label>
-        </div>
-        <div class="radio-option-wrapper">
-          <label for="dark">
-            <input type="radio" name="theme" id="dark" />
-            Dark
-          </label>
-        </div>
+        <label for="dark" class="input-label">
+          <input type="radio" name="theme" id="dark" checked class="input-radio" />
+          <div class="custom-radio">
+            <span></span>
+          </div>
+          Dark
+        </label>
+        <label for="light" class="input-label">
+          <input type="radio" name="theme" id="light" class="input-radio" />
+          <div class="custom-radio">
+            <span></span>
+          </div>
+          Light
+        </label>
       </div>
     </div>
 
-    <input type="hidden" name="themeColor" value="light" />
+    <input type="hidden" name="colorTheme" value="light" />
   </div>
 
   <div class="buttons-wrapper">
     <button class="button-secondary" id="cancel">Cancel</button>
-    <button class="button-primary" id="generate">Generate Palette</button>
+    <button class="button-primary" id="generate">Generate</button>
   </div>
 </form>
 
@@ -173,7 +281,7 @@
     let pluginFormData = new FormData(pluginForm);
 
     if (document.querySelector("#dark").checked) {
-      pluginFormData.set("themeColor", "dark");
+      pluginFormData.set("colorTheme", "dark");
     }
 
     if (document.querySelector("#alpha").checked) {

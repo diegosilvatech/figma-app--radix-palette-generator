@@ -1,6 +1,6 @@
 import { ColorTranslator } from "colortranslator";
 
-const getColorTranslated = (type, color) => {
+const generateFillColor = (type, color, visible = true) => {
   const { r, g, b, a } = new ColorTranslator(color).RGBAObject;
   return [
     {
@@ -10,9 +10,10 @@ const getColorTranslated = (type, color) => {
         g: g / 255,
         b: b / 255
       },
-      opacity: a
+      opacity: a,
+      visible: visible
     }
   ]
 }
 
-export { getColorTranslated };
+export { generateFillColor };

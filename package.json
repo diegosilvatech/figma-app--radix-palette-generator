@@ -14,10 +14,10 @@
     "@figma/plugin-typings": "^1.45.0",
     "esbuild": "^0.18.17",
     "handlebars": "^4.7.8",
-    "typescript": "*"
+    "typescript": "*",
+    "wcag-contrast": "^3.0.0"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "^3.1.0",
     "@radix-ui/colors": "latest",
     "colortranslator": "^3.0.1"
   }
