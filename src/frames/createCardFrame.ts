@@ -1,5 +1,5 @@
-import { formatName } from '../formatters/formatName';
-import { getColorTranslated } from '../colors/getColorTranslated';
+import { getColorTranslated } from '../helpers/colors/getColorTranslated';
+import { formatName } from '../helpers/formatters/formatName';
 
 const createCardFrame = (cardName, currentColor) => {
   const colorFill = getColorTranslated('SOLID', currentColor);
