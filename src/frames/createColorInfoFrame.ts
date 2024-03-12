@@ -1,19 +1,19 @@
 import { generateFillColor } from "../helpers/colors/generateFillColor";
 
 const createColorInfoFrame = (colorHex) => {
-  const fillColor = generateFillColor('SOLID', '#ff00ff');
-  const contrastDataFrame = figma.createFrame();
-  contrastDataFrame.name = 'Contrast Info';
-  contrastDataFrame.layoutMode = 'HORIZONTAL';
-  contrastDataFrame.primaryAxisSizingMode = 'FIXED';
-  contrastDataFrame.primaryAxisAlignItems = 'SPACE_BETWEEN';
-  contrastDataFrame.counterAxisAlignItems = 'CENTER';
-  contrastDataFrame.counterAxisSizingMode = 'FIXED';
-  contrastDataFrame.resize(108, 20);
+  const fillColor = generateFillColor('SOLID', '#ffffff', false);
+  const colorInfoFrame = figma.createFrame();
+  colorInfoFrame.name = 'Color Info';
+  colorInfoFrame.layoutMode = 'VERTICAL';
+  colorInfoFrame.primaryAxisSizingMode = 'AUTO';
+  colorInfoFrame.counterAxisSizingMode = 'FIXED';
+  colorInfoFrame.primaryAxisAlignItems = 'CENTER';
+  colorInfoFrame.counterAxisAlignItems = 'MIN';
+  colorInfoFrame.layoutAlign = 'STRETCH';
 
-  contrastDataFrame.fills = fillColor;
+  colorInfoFrame.fills = fillColor;
 
-  return contrastDataFrame;
+  return colorInfoFrame;
 };
 
 export { createColorInfoFrame };

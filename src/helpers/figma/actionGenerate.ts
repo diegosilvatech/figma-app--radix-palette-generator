@@ -1,4 +1,5 @@
 import { createText } from "../../fonts/createText";
+import { getApplicationTextContext } from "../../fonts/getApplicationTextContext";
 import { loadFont } from "../../fonts/loadFont";
 import { createColorInfoFrame } from "../../frames/createColorInfoFrame";
 import { createTintFrame } from "../../frames/createTintFrame";
@@ -41,6 +42,9 @@ const actionGenerate = async (formDataObject) => {
     colorStyle.name = tintNodeName;
     colorStyle.paints = stylePaints;
 
+    // TEXT DATA
+    const applicationText = getApplicationTextContext(colorLevel);
+
     // APPEND FRAMES
     const colorFrame = createColorFrame(cardName);
     parentFrame.appendChild(colorFrame);
@@ -49,17 +53,41 @@ const actionGenerate = async (formDataObject) => {
     const colorInfoFrame = createColorInfoFrame(colorHex);
     tintFrame.appendChild(colorInfoFrame);
 
+
     // LOAD FONTS
     await loadFont().then(() => {
+      const colorApplicationText = createText({
+        family: 'Inter',
+        style: 'Medium',
+        size: 6,
+        case: 'TITLE',
+        characters: applicationText,
+        color: '#000000',
+        opacity: 0.6
+      });
+
+      const colorNameText = createText({
+        family: 'Inter',
+        style: 'Bold',
+        size: 12,
+        case: 'TITLE',
+        characters: `${colorName} ${colorLevel}`,
+        color: '#000000'
+      });
+
       const colorHexText = createText({
         family: 'Inter',
-        style: 'Semi Bold',
-        size: 6,
+        style: 'Medium',
+        size: 8,
         case: 'UPPER',
         characters: colorHex,
-        color: '#ffcb00'
+        color: '#000000',
+        opacity: 0.6
       });
+
       // APPEND TEXTS
+      colorInfoFrame.appendChild(colorApplicationText);
+      colorInfoFrame.appendChild(colorNameText);
       colorInfoFrame.appendChild(colorHexText);
     });
   }
