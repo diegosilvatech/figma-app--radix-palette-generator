@@ -56,7 +56,6 @@ const actionGenerate = async (formDataObject) => {
     const colorInfoFrame = createColorInfoFrame(colorHex);
     tintFrame.appendChild(colorInfoFrame);
 
-
     // LOAD FONTS
     await loadFont().then(() => {
       const colorApplicationText = createText({
