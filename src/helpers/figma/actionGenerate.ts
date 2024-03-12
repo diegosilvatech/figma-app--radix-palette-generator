@@ -9,16 +9,16 @@ import { generateStyles } from "./generateStyles";
 
 const actionGenerate = (formDataObject) => {
 
-  const { colorType, themeColor, colorName } = formDataObject;
+  const { colorType, colorTheme, colorName } = formDataObject;
   const paletteColorsAmount = 12;
-  const parentFrame = createParentFrame(colorName, themeColor, colorType);
+  const parentFrame = createParentFrame(colorName, colorTheme, colorType);
 
   // for (let index = 0; index < paletteColorsAmount; index++) {
   for (let index = 0; index < paletteColorsAmount; index++) {
-    const currentColor = getCurrentColor(colorType, colorName, themeColor, index);
+    const currentColor = getCurrentColor(colorType, colorName, colorTheme, index);
 
     // CREATE CARD FRAME
-    const cardName = `${formatName(colorName)} ${formatName(themeColor)} ${formatName(colorType)} - ${index + 1}`;
+    const cardName = `${formatName(colorName)} ${formatName(colorTheme)} ${formatName(colorType)} - ${index + 1}`;
     // const cardFrame = createColorFrame(cardName, currentColor, colorName);
     // parentFrame.appendChild(cardFrame);
 
@@ -28,7 +28,7 @@ const actionGenerate = (formDataObject) => {
     figma.currentPage.selection = selectFrame;
     figma.viewport.scrollAndZoomIntoView(selectFrame);
 
-    const tintNodeName = `${formatName(colorName)}/${formatName(themeColor)}/${index + 1}`;
+    const tintNodeName = `${formatName(colorName)}/${formatName(colorTheme)}/${index + 1}`;
 
     const colorStyle = figma.createPaintStyle();
     const stylePaints: SolidPaint[] | Paint[] = generateStyles(

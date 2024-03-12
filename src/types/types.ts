@@ -1,7 +1,7 @@
 type FormDataProps = {
   colorName: string;
   colorType: "solid" | "alpha";
-  themeColor: "light" | "dark";
+  colorTheme: "light" | "dark";
 };
 
 type MessageProps = {

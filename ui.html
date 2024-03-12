@@ -266,7 +266,7 @@
       </div>
     </div>
 
-    <input type="hidden" name="themeColor" value="light" />
+    <input type="hidden" name="colorTheme" value="light" />
   </div>
 
   <div class="buttons-wrapper">
@@ -281,7 +281,7 @@
     let pluginFormData = new FormData(pluginForm);
 
     if (document.querySelector("#dark").checked) {
-      pluginFormData.set("themeColor", "dark");
+      pluginFormData.set("colorTheme", "dark");
     }
 
     if (document.querySelector("#alpha").checked) {

@@ -1,8 +1,8 @@
 import { getColorTranslated } from "../colors/getColorTranslated";
 import { formatName } from "../formatters/formatName";
 
-const createParentFrame = (colorName, themeColor, colorType) => {
-  const parentFrameName = `${formatName(colorName)} ${formatName(themeColor)} ${formatName(colorType)}`;
+const createParentFrame = (colorName, colorTheme, colorType) => {
+  const parentFrameName = `${formatName(colorName)} ${formatName(colorTheme)} ${formatName(colorType)}`;
 
   const parentFrameBackgroundColor = getColorTranslated('SOLID', '#ffffff', false);
   console.log('parentFrameBackgroundColor', parentFrameBackgroundColor)
