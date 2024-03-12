@@ -1,8 +1,9 @@
 import { generateFillColor } from '../helpers/colors/generateFillColor';
 import { formatName } from '../helpers/formatters/formatName';
 
-const createCardFrame = (cardName) => {
-  const fillColor = generateFillColor('SOLID', '#ffffff');
+const createCardFrame = (cardName, colorTheme) => {
+  const colorThemeBackground = colorTheme === 'light' ? '#ffffff' : '#111111';
+  const fillColor = generateFillColor('SOLID', colorThemeBackground);
 
   const cardFrame = figma.createFrame();
   cardFrame.name = formatName(cardName);

@@ -46,7 +46,7 @@ const actionGenerate = async (formDataObject) => {
     const applicationText = getApplicationTextContext(colorLevel);
 
     // APPEND FRAMES
-    const colorFrame = createColorFrame(cardName);
+    const colorFrame = createColorFrame(cardName, colorTheme);
     parentFrame.appendChild(colorFrame);
     const tintFrame = createTintFrame(colorHex);
     colorFrame.appendChild(tintFrame);
