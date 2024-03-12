@@ -1,10 +1,10 @@
-import { getColorTranslated } from "../colors/getColorTranslated";
+import { generateFillColor } from "../colors/generateFillColor";
 import { formatName } from "../formatters/formatName";
 
 const createParentFrame = (colorName, colorTheme, colorType) => {
   const parentFrameName = `${formatName(colorName)} ${formatName(colorTheme)} ${formatName(colorType)}`;
 
-  const parentFrameBackgroundColor = getColorTranslated('SOLID', '#ffffff', false);
+  const fillColor = generateFillColor('SOLID', '#ffffff', false);
 
   const parentFrame = figma.createFrame();
   parentFrame.name = parentFrameName;
@@ -17,7 +17,7 @@ const createParentFrame = (colorName, colorTheme, colorType) => {
   parentFrame.itemSpacing = 24;
   parentFrame.primaryAxisSizingMode = "AUTO";
   parentFrame.counterAxisSizingMode = "AUTO";
-  parentFrame.fills = parentFrameBackgroundColor;
+  parentFrame.fills = fillColor;
 
   return parentFrame;
 }

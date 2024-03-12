@@ -1,6 +1,6 @@
-import { getColorTranslated } from "../helpers/colors/getColorTranslated";
+import { generateFillColor } from "../helpers/colors/generateFillColor";
 
-const colorFill = getColorTranslated('SOLID', '#FF00FF');
+const colorFill = generateFillColor('SOLID', '#FF00FF');
 
 type TextCaseTypes = 'LOWER' | 'ORIGINAL' | 'TITLE' | 'UPPER';
 

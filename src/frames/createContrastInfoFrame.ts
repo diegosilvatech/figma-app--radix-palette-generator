@@ -1,10 +1,10 @@
-import { getColorTranslated } from "../helpers/colors/getColorTranslated";
+import { generateFillColor } from "../helpers/colors/generateFillColor";
 
 const createContrastInfoFrame = (
   // textColor,
   currentColor
 ) => {
-  const colorFill = getColorTranslated('SOLID', currentColor);
+  const colorFill = generateFillColor('SOLID', currentColor);
 
   const contrastInfoFrame = figma.createFrame();
   contrastInfoFrame.name = 'Contrast Info Frame';

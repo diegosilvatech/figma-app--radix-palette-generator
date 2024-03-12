@@ -1,8 +1,8 @@
-import { getColorTranslated } from '../helpers/colors/getColorTranslated';
+import { generateFillColor } from '../helpers/colors/generateFillColor';
 import { formatName } from '../helpers/formatters/formatName';
 
 const createCardFrame = (cardName) => {
-  const colorFill = getColorTranslated('SOLID', '#ffffff');
+  const colorFill = generateFillColor('SOLID', '#ffffff');
 
   const cardFrame = figma.createFrame();
   cardFrame.name = formatName(cardName);

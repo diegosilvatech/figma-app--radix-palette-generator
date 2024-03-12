@@ -1,10 +1,10 @@
 import { createText } from "../fonts/createText";
-import { getColorTranslated } from "../helpers/colors/getColorTranslated";
+import { generateFillColor } from "../helpers/colors/generateFillColor";
 import { createContrastDataFrame } from "./createContrastDataFrame";
 import { createContrastInfoFrame } from "./createContrastInfoFrame";
 
 const createTintFrame = (currentColor, colorName) => {
-  const colorFill = getColorTranslated('SOLID', currentColor);
+  const colorFill = generateFillColor('SOLID', currentColor);
 
   const tintFrame = figma.createFrame();
   tintFrame.name = 'Tint Frame';
