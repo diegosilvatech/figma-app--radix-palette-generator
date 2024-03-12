@@ -10,10 +10,6 @@ const createParentFrame = (colorName, colorTheme, colorType) => {
   parentFrame.name = parentFrameName;
 
   parentFrame.layoutMode = "HORIZONTAL";
-  parentFrame.paddingTop = 24;
-  parentFrame.paddingRight = 24;
-  parentFrame.paddingBottom = 24;
-  parentFrame.paddingLeft = 24;
   parentFrame.itemSpacing = 24;
   parentFrame.primaryAxisSizingMode = "AUTO";
   parentFrame.counterAxisSizingMode = "AUTO";

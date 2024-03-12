@@ -14,7 +14,8 @@
     "@figma/plugin-typings": "^1.45.0",
     "esbuild": "^0.18.17",
     "handlebars": "^4.7.8",
-    "typescript": "*"
+    "typescript": "*",
+    "wcag-contrast": "^3.0.0"
   },
   "dependencies": {
     "@radix-ui/colors": "latest",

@@ -4,6 +4,7 @@ import { loadFont } from "../../fonts/loadFont";
 import { createColorInfoFrame } from "../../frames/createColorInfoFrame";
 import { createTintFrame } from "../../frames/createTintFrame";
 import { getColorHex } from "../colors/getColorHex";
+import { checkContrast, getColorWithBetterContrast } from "../contrast/checkContrast";
 import { formatName } from "../formatters/formatName";
 import { createColorFrame } from "./createColorFrame";
 import { createParentFrame } from "./createParentFrame";
@@ -44,6 +45,8 @@ const actionGenerate = async (formDataObject) => {
 
     // TEXT DATA
     const applicationText = getApplicationTextContext(colorLevel);
+    const colorText = getColorWithBetterContrast(colorHex);
+
 
     // APPEND FRAMES
     const colorFrame = createColorFrame(cardName, colorTheme);
@@ -62,7 +65,7 @@ const actionGenerate = async (formDataObject) => {
         size: 6,
         case: 'TITLE',
         characters: applicationText,
-        color: '#000000',
+        color: colorText,
         opacity: 0.6
       });
 
@@ -72,7 +75,7 @@ const actionGenerate = async (formDataObject) => {
         size: 12,
         case: 'TITLE',
         characters: `${colorName} ${colorLevel}`,
-        color: '#000000'
+        color: colorText
       });
 
       const colorHexText = createText({
@@ -81,7 +84,7 @@ const actionGenerate = async (formDataObject) => {
         size: 8,
         case: 'UPPER',
         characters: colorHex,
-        color: '#000000',
+        color: colorText,
         opacity: 0.6
       });
 
