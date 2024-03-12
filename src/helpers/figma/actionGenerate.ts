@@ -15,10 +15,13 @@ const actionGenerate = (formDataObject) => {
   const parentFrame = createParentFrame(colorName, colorTheme, colorType);
 
   for (let index = 0; index < paletteColorsAmount; index++) {
+
+    // FRAME DATA
     const colorHex = getColorHex(colorType, colorName, colorTheme, index);
+    const colorLevel = index + 1;
 
     // CREATE CARD FRAME
-    const cardName = `${formatName(colorName)} ${formatName(colorTheme)} ${formatName(colorType)} - ${index + 1}`;
+    const cardName = `${formatName(colorName)} ${formatName(colorTheme)} ${formatName(colorType)} - ${colorLevel}`;
 
     // SELECT PARENT FRAME
     const selectFrame: FrameNode[] = [];
@@ -26,7 +29,7 @@ const actionGenerate = (formDataObject) => {
     figma.currentPage.selection = selectFrame;
     figma.viewport.scrollAndZoomIntoView(selectFrame);
 
-    const tintNodeName = `${formatName(colorName)}/${formatName(colorTheme)}/${index + 1}`;
+    const tintNodeName = `${formatName(colorName)}/${formatName(colorTheme)}/${colorLevel}`;
 
     const colorStyle = figma.createPaintStyle();
     const stylePaints: SolidPaint[] | Paint[] = generateStyles(
@@ -39,9 +42,11 @@ const actionGenerate = (formDataObject) => {
     colorStyle.paints = stylePaints;
 
     // APPEND FRAMES
-    const cardFrame = createColorFrame(cardName, colorHex, colorName);
-    parentFrame.appendChild(cardFrame);
-    // const tintFrame = createTintFrame()
+    const colorFrame = createColorFrame(cardName);
+    parentFrame.appendChild(colorFrame);
+    const tintFrame = createTintFrame(colorHex);
+    colorFrame.appendChild(tintFrame);
+
   }
   figma.closePlugin("Palette generated successfully! 👋🏽");
 }

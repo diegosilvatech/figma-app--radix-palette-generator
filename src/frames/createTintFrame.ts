@@ -1,10 +1,10 @@
 import { generateFillColor } from "../helpers/colors/generateFillColor";
 
-const createTintFrame = (colorHex, colorName) => {
+const createTintFrame = (colorHex) => {
   const fillColor = generateFillColor('SOLID', colorHex);
 
   const tintFrame = figma.createFrame();
-  tintFrame.name = 'Tint Frame';
+  tintFrame.name = 'Tint';
 
   const tintFrameWidth = 120;
   const tintFrameHeight = 120;
