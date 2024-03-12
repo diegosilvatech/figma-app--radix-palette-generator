@@ -5,7 +5,6 @@ const createParentFrame = (colorName, colorTheme, colorType) => {
   const parentFrameName = `${formatName(colorName)} ${formatName(colorTheme)} ${formatName(colorType)}`;
 
   const parentFrameBackgroundColor = getColorTranslated('SOLID', '#ffffff', false);
-  console.log('parentFrameBackgroundColor', parentFrameBackgroundColor)
 
   const parentFrame = figma.createFrame();
   parentFrame.name = parentFrameName;

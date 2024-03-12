@@ -22,7 +22,6 @@ const createText = (font: FontProps) => {
   text.textCase = font.case;
   text.characters = font.characters;
   text.fills = colorFill;
-  // text.fills = [{ type: 'SOLID', color: convertHexToRgb(font.color) }];
   text.opacity = font.opacity || 1;
 
   return text;
