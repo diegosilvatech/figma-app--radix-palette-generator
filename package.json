@@ -17,7 +17,7 @@
     "typescript": "*"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "^3.1.0",
+    "@create-figma-plugin/utilities": "2.0.0",
     "@radix-ui/colors": "latest",
     "colortranslator": "^3.0.1"
   }

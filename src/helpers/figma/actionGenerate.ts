@@ -1,3 +1,6 @@
+import { createText } from "../../fonts/createText";
+import { loadFont } from "../../fonts/loadFont";
+import { createContrastDataFrame } from "../../frames/createContrastDataFrame";
 import { getCurrentColor } from "../colors/getCurrentColor";
 import { formatName } from "../formatters/formatName";
 import { createColorFrame } from "./createColorFrame";
@@ -15,7 +18,7 @@ const actionGenerate = (formDataObject) => {
 
     // CREATE CARD FRAME
     const cardName = `${formatName(colorName)} ${formatName(themeColor)} ${formatName(colorType)} - ${index + 1}`;
-    const cardFrame = createColorFrame(cardName, currentColor);
+    const cardFrame = createColorFrame(cardName, currentColor, colorName);
     parentFrame.appendChild(cardFrame);
 
     // SELECT PARENT FRAME
@@ -35,6 +38,8 @@ const actionGenerate = (formDataObject) => {
     );
     colorStyle.name = tintNodeName;
     colorStyle.paints = stylePaints;
+
+    // CREATE TEXTS
   }
   figma.closePlugin("Palette generated successfully! 👋🏽");
 }

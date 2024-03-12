@@ -1,9 +1,14 @@
 import { createCardFrame } from '../../frames/createCardFrame';
+import { createTintFrame } from '../../frames/createTintFrame';
 
-const createColorFrame = (cardName, currentColor) => {
-  const colorFrame = createCardFrame(cardName, currentColor);
+const createColorFrame = (cardName, currentColor, colorName) => {
+  const cardFrame = createCardFrame(cardName);
+  const tintFrame = createTintFrame(currentColor, colorName);
 
-  return colorFrame;
+  // APPEND CHILDS
+  cardFrame.appendChild(tintFrame);
+
+  return cardFrame;
 };
 
 export { createColorFrame };
