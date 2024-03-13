@@ -1,8 +1,12 @@
 {
-  "name": "Radix Palette Generator",
+  "name": "Radix UI Colors",
   "id": "1107519474149272460",
   "api": "1.0.0",
   "main": "code.js",
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": ["none"]
+  },
   "editorType": [
     "figma"
   ],

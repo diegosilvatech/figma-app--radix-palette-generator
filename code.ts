@@ -4,7 +4,7 @@ import { actionGenerate } from './src/helpers/figma/actionGenerate';
 figma.showUI(__html__, {
   width: 340,
   height: 292,
-  title: "Radix Palette Generator",
+  title: "Radix UI Colors",
 });
 
 figma.ui.onmessage = (message: MessageProps) => {
